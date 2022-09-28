@@ -71,7 +71,7 @@ exports.sourceNodes = function () {
 
                       case 4:
                         channelResp = _context.sent;
-                        channelData = channelResp.data.items[0];
+                        channelData = channelResp.data.items && channelResp.data.items[0];
 
                         if (!channelData) {
                           _context.next = 22;

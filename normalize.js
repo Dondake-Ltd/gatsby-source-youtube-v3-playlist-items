@@ -30,6 +30,7 @@ exports.normalizeRecords = function (items) {
   return (items || []).map(function (item) {
     var e = {
       id: get(item, "id"),
+      playlistId: get(item, "snippet.playlistId"),
       publishedAt: get(item, "snippet.publishedAt"),
       title: get(item, "snippet.title"),
       description: get(item, "snippet.description"),
