@@ -58,7 +58,7 @@ exports.sourceNodes = function () {
 
             createVideoNodesFromChannelId = function () {
               var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(channelId, apiKey) {
-                var api, videos, playlistsResp, playlistsData, pageSize, i, _videos, playlistId, videoResp, nextPageToken, _i, _videos2, _playlistId, _videoResp;
+                var api, videos, pageSize, playlistsResp, playlistsData, i, _videos, playlistId, videoResp, nextPageToken, _i, _videos2, _playlistId, _videoResp;
 
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
@@ -66,10 +66,11 @@ exports.sourceNodes = function () {
                       case 0:
                         api = getApi();
                         videos = [];
-                        _context.next = 4;
-                        return api.get("playlists?part=contentDetails&channelId=" + channelId + "&key=" + apiKey);
+                        pageSize = Math.min(50, maxVideos);
+                        _context.next = 5;
+                        return api.get("playlists?part=contentDetails&channelId=" + channelId + "&key=" + apiKey + "&maxResults=" + pageSize);
 
-                      case 4:
+                      case 5:
                         playlistsResp = _context.sent;
                         playlistsData = playlistsResp.data.items;
 
@@ -78,7 +79,6 @@ exports.sourceNodes = function () {
                           break;
                         }
 
-                        pageSize = Math.min(50, maxVideos);
                         i = 0;
 
                       case 9:

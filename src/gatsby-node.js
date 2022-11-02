@@ -38,14 +38,13 @@ exports.sourceNodes = async (
   const createVideoNodesFromChannelId = async (channelId, apiKey) => {
     var api = getApi();
     let videos = [];
-
+    let pageSize = Math.min(50, maxVideos);
     const playlistsResp = await api.get(
-      `playlists?part=contentDetails&channelId=${channelId}&key=${apiKey}`
+      `playlists?part=contentDetails&channelId=${channelId}&key=${apiKey}&maxResults=${pageSize}`
     );
 
     const playlistsData = playlistsResp.data.items;
     if (!!playlistsData) {
-      let pageSize = Math.min(50, maxVideos);
       for (let i = 0; i < playlistsData.length; i++) {
         let playlistId = playlistsData[i].id;
         let videoResp = await api.get(
